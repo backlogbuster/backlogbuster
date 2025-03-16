@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R20 R23 Selection</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            max-width: 100vw;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .watermark {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.15);
+            font-weight: bold;
+            pointer-events: none;
+            transform: rotate(-30deg);
+            white-space: nowrap;
+        }
+        @media (min-width: 720px) and (max-width: 1200px) {
+            .container {
+                max-width: 600px;
+            }
+            .btn {
+                font-size: 20px;
+                padding: 12px 25px;
+            }
+            select {
+                font-size: 18px;
+                padding: 8px;
+            }
+            h1, h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Regulation</h1>
+        <button class="btn" id="r20">R20</button>
+        <button class="btn" id="r23">R23</button>
+        
+        <h2 id="semester-title">Select Semester</h2>
+        <select id="semester">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="1-1">1-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="3-1">3-1</option>
+            <option value="3-2">3-2</option>
+            <option value="4-1">4-1</option>
+            <option value="4-2">4-2</option>
+        </select>
+        
+        <h2 id="branch-title">Select Branch</h2>
+        <select id="branch">
+            <option value="" disabled selected>Select Branch</option>
+            <option value="AIML">AIML</option>
+            <option value="DS">DS</option>
+            <option value="CS">CS</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="AME">AME</option>
+        </select>
+        
+        <h2>Select Subject</h2>
+        <select id="subject">
+            <option value="" disabled selected>Select Subject</option>
+        </select>
+    </div>
+    
+    <script>
+        document.getElementById("r20").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("r23").classList.remove("active");
+            document.getElementById("semester-title").textContent = "Select R20 Semester";
+            document.getElementById("branch-title").textContent = "Select R20 Branch";
+        });
+        
+        document.getElementById("r23").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("r20").classList.remove("active");
+            document.getElementById("semester-title").textContent = "Select R23 Semester";
+            document.getElementById("branch-title").textContent = "Select R23 Branch";
+        });
+        
+        const subjects = {
+            "1-1": {
+                "AIML": ["English", "M1", "Chemistry", "PPC"],
+                "DS": ["English", "M1", "Physics", "C Programming"],
+                "CS": ["English", "M1", "Physics", "Python Basics"],
+                "CSE": ["English", "M1", "Chemistry", "C Programming"],
+                "ECE": ["English", "M1", "Physics", "Basic Electronics"],
+                "EEE": ["English", "M1", "Physics", "Electrical Circuits"],
+                "CIVIL": ["English", "M1", "Chemistry", "Engineering Mechanics"],
+                "MECH": ["English", "M1", "Chemistry", "Engineering Graphics"],
+                "AME": ["English", "M1", "Physics", "Aerodynamics"]
+            }
+        };
+        
+        document.getElementById("semester").addEventListener("change", updateSubjects);
+        document.getElementById("branch").addEventListener("change", updateSubjects);
+        
+        function updateSubjects() {
+            let semester = document.getElementById("semester").value;
+            let branch = document.getElementById("branch").value;
+            let subjectDropdown = document.getElementById("subject");
+            
+            subjectDropdown.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+            
+            if (subjects[semester] && subjects[semester][branch]) {
+                subjects[semester][branch].forEach(subject => {
+                    let option = document.createElement("option");
+                    option.value = subject;
+                    option.textContent = subject;
+                    subjectDropdown.appendChild(option);
+                });
+            }
+        }
+
+        function addWatermarks() {
+            let rows = 6;
+            let cols = 6;
+            let spacingX = window.innerWidth / cols;
+            let spacingY = window.innerHeight / rows;
+
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    let watermark = document.createElement("div");
+                    watermark.classList.add("watermark");
+                    watermark.textContent = "BacklogBuster";
+                    watermark.style.top = (i * spacingY) + "px";
+                    watermark.style.left = (j * spacingX) + "px";
+                    document.body.appendChild(watermark);
+                }
+            }
+        }
+        
+        addWatermarks();
+    </script>
+</body>
+</html>
