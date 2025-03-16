@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject PDFs</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .pdf-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #222;
+            border: 1px solid cyan;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px cyan;
+        }
+        .card a {
+            color: cyan;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="subject-title">Subject PDFs</h1>
+    <div class="pdf-container" id="pdf-container"></div>
+
+    <script>
+        // Get subject name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const subject = urlParams.get("subject");
+
+        // Define PDFs for each subject
+        const pdfData = {
+            "Chemistry": ["Unit1.pdf", "Unit2.pdf", "Unit3.pdf", "Unit4.pdf", "Unit5.pdf"],
+            "English": ["English.pdf"],
+            "M1": ["Unit1.pdf", "Unit2.pdf", "Unit3.pdf", "Unit4.pdf", "Unit5.pdf"],
+            "PPC": ["Unit1.pdf", "Unit2.pdf", "Unit3.pdf", "Unit4.pdf", "Unit5.pdf"]
+        };
+
+        if (subject && pdfData[subject]) {
+            document.getElementById("subject-title").textContent = `${subject} PDFs`;
+
+            // Folder path for PDFs
+            const basePath = `pdf/R20_AIML_1-1/${subject}/`;
+            let pdfContainer = document.getElementById("pdf-container");
+
+            pdfData[subject].forEach(pdf => {
+                let card = document.createElement("div");
+                card.classList.add("card");
+
+                let link = document.createElement("a");
+                link.href = basePath + pdf;
+                link.textContent = pdf.replace(".pdf", ""); // Removing ".pdf" for cleaner text
+                link.target = "_blank";
+
+                card.appendChild(link);
+                pdfContainer.appendChild(card);
+            });
+        } else {
+            document.getElementById("subject-title").textContent = "No Subject Selected!";
+        }
+    </script>
+</body>
+</html>

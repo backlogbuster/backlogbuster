@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R20 R23 Selection</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background-color: black;
@@ -15,45 +16,58 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            position: relative;
-            overflow-x: hidden;
             box-sizing: border-box;
+            margin: 0;
+            padding: 10px;
         }
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
-            max-width: 100vw;
+            padding: 20px;
         }
         .btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 10px;
+            padding: 12px;
+            font-size: 16px;
+            margin: 5px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            background-color: #444;
+            color: white;
             cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:active {
+            background-color: #43fa00fc;
+        }.btn1{
+            padding: 12px;
+            font-size: 16px;
+            margin: 5px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 5px;
+        }.btn1:active{
+            background-color: green;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
         }
         .watermark {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(255, 255, 255, 0.15);
+            position: fixed;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.1);
             font-weight: bold;
             pointer-events: none;
             transform: rotate(-30deg);
             white-space: nowrap;
-        }
-        @media (min-width: 720px) and (max-width: 1200px) {
-            .container {
-                max-width: 600px;
-            }
-            .btn {
-                font-size: 20px;
-                padding: 12px 25px;
-            }
-            select {
-                font-size: 18px;
-                padding: 8px;
-            }
-            h1, h2 {
-                font-size: 22px;
-            }
         }
     </style>
 </head>
@@ -95,8 +109,33 @@
             <option value="" disabled selected>Select Subject</option>
         </select>
     </div>
+
+    <div>
+        <button class="btn1" id="search-btn">
+            search
+        </button>
+    </div>
     
     <script>
+       document.getElementById("search-btn").addEventListener("click", function() {
+    let subject = document.getElementById("subject").value;
+    if (subject) {
+        window.open(`subject.html?subject=${encodeURIComponent(subject)}`, "_blank");
+    } else {
+       // alert("Please select a subject first!");
+       Swal.fire({
+        icon: 'warning',
+        title: 'No Subjects Found!',
+        text: 'Please select a semester,branch and subject.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+        });
+
+
+    }
+});
+
+
         document.getElementById("r20").addEventListener("click", function() {
             this.classList.add("active");
             document.getElementById("r23").classList.remove("active");
@@ -124,46 +163,29 @@
                 "AME": ["English", "M1", "Physics", "Aerodynamics"]
             }
         };
-        
-        document.getElementById("semester").addEventListener("change", updateSubjects);
-        document.getElementById("branch").addEventListener("change", updateSubjects);
-        
-        function updateSubjects() {
-            let semester = document.getElementById("semester").value;
-            let branch = document.getElementById("branch").value;
-            let subjectDropdown = document.getElementById("subject");
-            
-            subjectDropdown.innerHTML = '<option value="" disabled selected>Select Subject</option>';
-            
-            if (subjects[semester] && subjects[semester][branch]) {
-                subjects[semester][branch].forEach(subject => {
-                    let option = document.createElement("option");
-                    option.value = subject;
-                    option.textContent = subject;
-                    subjectDropdown.appendChild(option);
-                });
-            }
-        }
+       
+    document.getElementById("semester").addEventListener("change", updateSubjects);
+    document.getElementById("branch").addEventListener("change", updateSubjects);
 
-        function addWatermarks() {
-            let rows = 6;
-            let cols = 6;
-            let spacingX = window.innerWidth / cols;
-            let spacingY = window.innerHeight / rows;
+    function updateSubjects() {
+        let semester = document.getElementById("semester").value;
+        let branch = document.getElementById("branch").value;
+        let subjectDropdown = document.getElementById("subject");
 
-            for (let i = 0; i < rows; i++) {
-                for (let j = 0; j < cols; j++) {
-                    let watermark = document.createElement("div");
-                    watermark.classList.add("watermark");
-                    watermark.textContent = "BacklogBuster";
-                    watermark.style.top = (i * spacingY) + "px";
-                    watermark.style.left = (j * spacingX) + "px";
-                    document.body.appendChild(watermark);
-                }
-            }
-        }
-        
-        addWatermarks();
+        // Reset subjects dropdown
+        subjectDropdown.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+
+        // Check if valid semester and branch exist in the dataset
+        if (subjects[semester] && subjects[semester][branch]) {
+            subjects[semester][branch].forEach(subject => {
+                let option = document.createElement("option");
+                option.value = subject;
+                option.textContent = subject;
+                subjectDropdown.appendChild(option);
+            });
+        } 
+    }
+    
     </script>
 </body>
 </html>
