@@ -1,0 +1,110 @@
+{
+    "R20": {
+      "semesters": {
+        "1-1": {
+          "departments": {
+            "AIML": ["Mathematics-I", "Programming in C", "Chemistry","English"],
+            "CSE": ["Mathematics-I", "Engineering Physics", "Basic Electrical Engineering","English"],
+            "ECE": ["Mathematics-I", "Applied Chemistry", "Electronic Devices","English"],
+            "EEE": ["Mathematics-I", "Applied Physics", "Circuit Theory","English"],
+            "CIVIL": ["Mathematics-I", "Engineering Chemistry", "Engineering Mechanics","English"],
+            "MECH": ["Mathematics-I", "Engineering Chemistry", "Engineering Drawing","English"],
+            "DS": ["Mathematics-I", "Programming in Python", "Data Science Basics","English"],
+            "CS": ["Mathematics-I", "Programming in C", "Computer Organization","English"],
+            "AME": ["Mathematics-I", "Engineering Physics", "Material Science","English"]
+          }
+        },
+        "1-2": {
+          "departments": {
+            "AIML": ["Mathematics-II", "Data Structures", "Digital Logic Design","Python","Physics"],
+            "CSE": ["Mathematics-II", "Data Structures", "Discrete Structures"],
+            "ECE": ["Mathematics-II", "Signals and Systems", "Network Theory"],
+            "EEE": ["Mathematics-II", "Electromagnetic Fields", "Electrical Machines-I"],
+            "CIVIL": ["Mathematics-II", "Strength of Materials", "Surveying"],
+            "MECH": ["Mathematics-II", "Thermodynamics", "Manufacturing Processes"],
+            "DS": ["Mathematics-II", "Statistics", "Data Visualization"],
+            "CS": ["Mathematics-II", "Object-Oriented Programming", "Database Systems"],
+            "AME": ["Mathematics-II", "Fluid Mechanics", "Automotive Basics"]
+          }
+        },
+        "2-1": {
+          "departments": {
+            "AIML": ["Mathematics-III", "Intro to AI and ML", "Object Oriented Programming with Java","Database Management system","Mathematical Foundations of Computer Science"],
+            "CSE": ["Probability and Statistics", "Operating Systems", "Computer Networks"],
+            "ECE": ["Probability and Statistics", "Electronic Circuit Analysis", "Digital Electronics"],
+            "EEE": ["Probability and Statistics", "Electrical Machines-II", "Power Systems-I"],
+            "CIVIL": ["Probability and Statistics", "Fluid Mechanics", "Structural Analysis-I"],
+            "MECH": ["Probability and Statistics", "Mechanics of Solids", "Machine Drawing"],
+            "DS": ["Probability and Statistics", "Database Management Systems", "Data Structures"],
+            "CS": ["Probability and Statistics", "Operating Systems", "Software Engineering"],
+            "AME": ["Probability and Statistics", "Automotive Engines", "Mechanics of Materials"]
+          }
+        },
+        "2-2": {
+          "departments": {
+            "AIML": ["Discrete Mathematics", "Machine Learning Basics", "Computer Networks"],
+            "CSE": ["Discrete Mathematics", "Design and Analysis of Algorithms", "Database Systems"],
+            "ECE": ["Linear IC Applications", "Analog Communications", "Microprocessors"],
+            "EEE": ["Control Systems", "Power Electronics", "Electrical Measurements"],
+            "CIVIL": ["Hydraulics", "Structural Analysis-II", "Geotechnical Engineering-I"],
+            "MECH": ["Heat Transfer", "Kinematics of Machinery", "Metallurgy"],
+            "DS": ["Discrete Mathematics", "Big Data Basics", "Operating Systems"],
+            "CS": ["Discrete Mathematics", "Computer Networks", "Web Technologies"],
+            "AME": ["Vehicle Dynamics", "Thermodynamics", "Manufacturing Technology"]
+          }
+        },
+        "3-1": {
+          "departments": {
+            "AIML": ["Artificial Intelligence", "Software Engineering", "Compiler Design"],
+            "CSE": ["Compiler Design", "Software Engineering", "Artificial Intelligence"],
+            "ECE": ["Digital Communications", "VLSI Design", "Antenna and Wave Propagation"],
+            "EEE": ["Power Systems-II", "Microcontrollers", "Renewable Energy Sources"],
+            "CIVIL": ["Design of Concrete Structures", "Geotechnical Engineering-II", "Transportation Engineering"],
+            "MECH": ["Dynamics of Machinery", "Machine Design", "Finite Element Analysis"],
+            "DS": ["Data Mining", "Machine Learning", "Cloud Computing"],
+            "CS": ["Cloud Computing", "Information Security", "Data Mining"],
+            "AME": ["Automotive Electrical Systems", "Machine Design", "Heat Transfer"]
+          }
+        },
+        "3-2": {
+          "departments": {
+            "AIML": ["Deep Learning", "Cloud Computing", "Internet of Things"],
+            "CSE": ["Internet of Things", "Machine Learning", "Distributed Systems"],
+            "ECE": ["Embedded Systems", "Microwave Engineering", "Digital Signal Processing"],
+            "EEE": ["Power System Operation and Control", "Digital Signal Processing", "High Voltage Engineering"],
+            "CIVIL": ["Design of Steel Structures", "Environmental Engineering", "Construction Management"],
+            "MECH": ["CAD/CAM", "Robotics", "Refrigeration and Air Conditioning"],
+            "DS": ["Deep Learning", "Distributed Systems", "Internet of Things"],
+            "CS": ["Distributed Systems", "Cyber Security", "Mobile Computing"],
+            "AME": ["Automotive Chassis Design", "CAD/CAM", "Alternative Fuels"]
+          }
+        },
+        "4-1": {
+          "departments": {
+            "AIML": ["Natural Language Processing", "Big Data Analytics", "Elective-I"],
+            "CSE": ["Big Data Analytics", "Cryptography", "Elective-I"],
+            "ECE": ["Optical Communication", "Radar Systems", "Elective-I"],
+            "EEE": ["Smart Grid", "Electric Drives", "Elective-I"],
+            "CIVIL": ["Prestressed Concrete", "Water Resources Engineering", "Elective-I"],
+            "MECH": ["Automobile Engineering", "Production Planning", "Elective-I"],
+            "DS": ["Natural Language Processing", "Data Security", "Elective-I"],
+            "CS": ["Blockchain Technology", "Advanced Databases", "Elective-I"],
+            "AME": ["Vehicle Body Engineering", "Automotive Safety", "Elective-I"]
+          }
+        },
+        "4-2": {
+          "departments": {
+            "AIML": ["Reinforcement Learning", "Project Work", "Elective-II"],
+            "CSE": ["DevOps", "Project Work", "Elective-II"],
+            "ECE": ["Wireless Sensor Networks", "Project Work", "Elective-II"],
+            "EEE": ["Energy Auditing", "Project Work", "Elective-II"],
+            "CIVIL": ["Earthquake Engineering", "Project Work", "Elective-II"],
+            "MECH": ["Mechatronics", "Project Work", "Elective-II"],
+            "DS": ["Reinforcement Learning", "Project Work", "Elective-II"],
+            "CS": ["Ethical Hacking", "Project Work", "Elective-II"],
+            "AME": ["Automotive Control Systems", "Project Work", "Elective-II"]
+          }
+        }
+      }
+    }
+  }

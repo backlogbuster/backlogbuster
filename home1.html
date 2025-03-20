@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R20 R23 Selection</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        .btn {
+            padding: 12px;
+            font-size: 16px;
+            margin: 5px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:active {
+            background-color: #43fa00fc;
+        }.btn1{
+            padding: 12px;
+            font-size: 16px;
+            margin: 5px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 5px;
+        }.btn1:active{
+            background-color: green;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .watermark {
+            position: fixed;
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: bold;
+            pointer-events: none;
+            transform: rotate(-30deg);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Regulation</h1>
+        <button class="btn" id="r20">R20</button>
+        <button class="btn" id="r23">R23</button>
+        
+        <h2 id="semester-title">Select Semester</h2>
+        <select id="semester">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="1-1">1-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="3-1">3-1</option>
+            <option value="3-2">3-2</option>
+            <option value="4-1">4-1</option>
+            <option value="4-2">4-2</option>
+        </select>
+        
+        <h2 id="branch-title">Select Branch</h2>
+        <select id="branch">
+            <option value="" disabled selected>Select Branch</option>
+            <option value="AIML">AIML</option>
+            <option value="DS">DS</option>
+            <option value="CS">CS</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="AME">AME</option>
+        </select>
+        
+        <h2>Select Subject</h2>
+        <select id="subject">
+            <option value="" disabled selected>Select Subject</option>
+        </select>
+    </div>
+
+    <div>
+        <button class="btn1" id="search-btn">
+            search
+        </button>
+    </div>
+    
+    <script>
+       document.getElementById("search-btn").addEventListener("click", function() {
+    let subject = document.getElementById("subject").value;
+    if (subject) {
+        window.open(`subject.html?subject=${encodeURIComponent(subject)}`, "_blank");
+    } else {
+        alert("Please select a subject first!");
+    }
+});
+
+
+        document.getElementById("r20").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("r23").classList.remove("active");
+            document.getElementById("semester-title").textContent = "Select R20 Semester";
+            document.getElementById("branch-title").textContent = "Select R20 Branch";
+        });
+        
+        document.getElementById("r23").addEventListener("click", function() {
+            this.classList.add("active");
+            document.getElementById("r20").classList.remove("active");
+            document.getElementById("semester-title").textContent = "Select R23 Semester";
+            document.getElementById("branch-title").textContent = "Select R23 Branch";
+        });
+        
+        const subjects = {
+            "1-1": {
+                "AIML": ["English", "M1", "Chemistry", "PPC"],
+                "DS": ["English", "M1", "Physics", "C Programming"],
+                "CS": ["English", "M1", "Physics", "Python Basics"],
+                "CSE": ["English", "M1", "Chemistry", "C Programming"],
+                "ECE": ["English", "M1", "Physics", "Basic Electronics"],
+                "EEE": ["English", "M1", "Physics", "Electrical Circuits"],
+                "CIVIL": ["English", "M1", "Chemistry", "Engineering Mechanics"],
+                "MECH": ["English", "M1", "Chemistry", "Engineering Graphics"],
+                "AME": ["English", "M1", "Physics", "Aerodynamics"]
+            }
+        };
+       
+    document.getElementById("semester").addEventListener("change", updateSubjects);
+    document.getElementById("branch").addEventListener("change", updateSubjects);
+
+    function updateSubjects() {
+        let semester = document.getElementById("semester").value;
+        let branch = document.getElementById("branch").value;
+        let subjectDropdown = document.getElementById("subject");
+
+        // Reset subjects dropdown
+        subjectDropdown.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+
+        // Check if valid semester and branch exist in the dataset
+        if (subjects[semester] && subjects[semester][branch]) {
+            subjects[semester][branch].forEach(subject => {
+                let option = document.createElement("option");
+                option.value = subject;
+                option.textContent = subject;
+                subjectDropdown.appendChild(option);
+            });
+        } else {
+          Swal.fire({
+        icon: 'warning',
+        title: 'No Subjects Found!',
+        text: 'Please select a valid semester and branch.',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+        });
+
+        }
+    }
+    
+    </script>
+</body>
+</html>

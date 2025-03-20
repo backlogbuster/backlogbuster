@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R20 Selection</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        button {
+            padding: 12px;
+            font-size: 16px;
+            margin: 10px;
+            width: 100%;
+            max-width: 200px;
+            border: none;
+            background-color: #444;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:active {
+            background-color: #43fa00fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>R20 Regulation</h1>
+        
+        <h2>Select Semester</h2>
+        <select id="semester">
+            <option value="" disabled selected>Select Semester</option>
+            <option value="1-1">1-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="3-1">3-1</option>
+            <option value="3-2">3-2</option>
+            <option value="4-1">4-1</option>
+            <option value="4-2">4-2</option>
+        </select>
+        
+        <h2>Select Department</h2>
+        <select id="department">
+            <option value="" disabled selected>Select Department</option>
+            <option value="AIML">AIML</option>
+            <option value="DS">DS</option>
+            <option value="CS">CS</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="MECH">MECH</option>
+            <option value="AME">AME</option>
+        </select>
+        
+        <h2>Select Subject</h2>
+        <select id="subjects">
+            <option value="" disabled selected>Select Subject</option>
+        </select>
+        
+        <button id="submit-btn">Submit</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const semesterSelect = document.getElementById("semester");
+            const departmentSelect = document.getElementById("department");
+            const subjectSelect = document.getElementById("subjects");
+            let r20Data = null;
+
+            // Fetch JSON data
+            fetch('r20_subjects.json')
+                .then(response => response.json())
+                .then(data => {
+                    r20Data = data.R20;
+                    console.log("JSON loaded:", r20Data);
+                })
+                .catch(error => console.error("Error loading JSON:", error));
+
+            // Simple mapping for subject codes (expand as needed)
+            const subjectCodeMap = {
+                "Mathematics-I": "M1",
+                "Programming in C": "PPC",
+                "Mathematics-II": "M2",
+                "Data Structures": "DS",
+                "Operating Systems": "OS",
+                "Probability and Statistics": "PS",
+                "Digital Logic Design":"dld",
+                "Mathematics-III": "M3",
+                "Database Management system":"dbms",
+                "Mathematical Foundations of Computer Science":"mfcs",
+                "Artificial Intelligence":"AI",
+                "Object Oriented Programming with Java":"java"
+
+                // Add more mappings for all subjects in r20_subjects.json
+            };
+
+            // Update subjects when semester or department changes
+            function updateSubjects() {
+                const semester = semesterSelect.value;
+                const department = departmentSelect.value;
+                
+                subjectSelect.innerHTML = '<option value="" disabled selected>Select Subject</option>';
+
+                if (r20Data && semester && department && r20Data.semesters[semester]?.departments[department]) {
+                    const subjects = r20Data.semesters[semester].departments[department];
+                    subjects.forEach(subject => {
+                        const option = document.createElement("option");
+                        option.value = subject; // Full subject name as value
+                        option.text = subject;
+                        subjectSelect.appendChild(option);
+                    });
+                }
+            }
+
+            semesterSelect.addEventListener("change", updateSubjects);
+            departmentSelect.addEventListener("change", updateSubjects);
+
+            // Submit button redirects to subject.html
+            document.getElementById("submit-btn").addEventListener("click", function () {
+                const semester = semesterSelect.value;
+                const department = departmentSelect.value;
+                const subject = subjectSelect.value;
+
+                if (semester && department && subject) {
+                    const subjectCode = subjectCodeMap[subject] || subject.replace(/ /g, ""); // Fallback to no spaces
+                    const url = `subject.html?regulation=R20&department=${encodeURIComponent(department)}&subjectCode=${encodeURIComponent(subjectCode)}`;
+                    window.open(url, "_blank");
+                } else {
+                    alert("Please select semester, department, and subject!");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

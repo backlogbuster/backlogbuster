@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject PDF Viewer</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .pdf-links {
+            margin-top: 20px;
+        }
+        a {
+            color: #43fa00fc;
+            text-decoration: none;
+            margin: 10px;
+            display: inline-block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Subject PDFs</h1>
+    <p id="subject-info">Loading...</p>
+    <div class="pdf-links" id="pdf-links"></div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const regulation = urlParams.get("regulation");
+    const department = urlParams.get("department");
+    const subjectCode = urlParams.get("subjectCode");
+
+    if (regulation && department && subjectCode) {
+        document.getElementById("subject-info").textContent = 
+            `${regulation} - ${department} - ${subjectCode}`;
+
+        const basePath = `${regulation}_${department}/${subjectCode}/`;
+        const pdfLinksDiv = document.getElementById("pdf-links");
+
+        // List of subjects that have only one PDF
+        const singlePdfSubjects = ["english","ai","dld"]; // Add more if needed
+
+        if (singlePdfSubjects.includes(subjectCode.toLowerCase())) { 
+            // Only one PDF for English
+            const link = document.createElement("a");
+            link.href = basePath + `${subjectCode}.pdf`;
+            link.textContent = `${subjectCode.charAt(0).toUpperCase() + subjectCode.slice(1)} PDF`;
+            link.target = "_blank";
+            pdfLinksDiv.appendChild(link);
+        } else {
+            // For other subjects, show Unit1 to Unit5
+            for (let i = 1; i <= 5; i++) {
+                const pdfFile = `Unit${i}.pdf`;
+                const pdfPath = basePath + pdfFile;
+                const link = document.createElement("a");
+                link.href = pdfPath;
+                link.textContent = `Unit ${i}`;
+                link.target = "_blank";
+                pdfLinksDiv.appendChild(link);
+            }
+        }
+    } else {
+        document.getElementById("subject-info").textContent = "Invalid selection!";
+    }
+});
+
+    </script>
+</body>
+</html>
