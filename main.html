@@ -3,197 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Project - Inspired by xAI Grok</title>
+    <title>BacklogBuster</title>
     <style>
-        * {
+        body {
+            background-color: black;
+            color: white;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        body {
-            /* Existing background with violet and pink shades */
-            background: linear-gradient(135deg, #2a1a3a 0%, #4a2a5a 50%, #ff69b4 100%);
-            background-image: linear-gradient(135deg, #2a1a3a 0%, #4a2a5a 50%, #ff69b4 100%), 
-                              radial-gradient(circle at 100% 0%, rgba(255, 105, 180, 0.3) 0%, transparent 50%);
-            background-blend-mode: overlay;
-            color: #fff;
-            height: 100vh;
+            position: relative;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            flex-grow: 1;
-            text-align: center;
-            padding: 20px; /* Add padding to prevent content from touching edges on mobile */
+            align-items: center;
+            height: 100vh;
         }
-
-        .main-title {
-            font-size: 150px; /* Default for desktop */
-            font-weight: bold;
-            opacity: 0.1;
-            letter-spacing: 10px;
-            margin-bottom: 10px; /* Reduced margin to bring subheading closer */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
-            word-break: break-word; /* Ensure long text breaks on smaller screens */
-        }
-
-        /* Subheading styling */
-        .subheading {
-            font-size: 24px; /* Default for desktop */
-            font-weight: normal;
-            opacity: 0.7;
-            letter-spacing: 2px;
-            margin-bottom: 20px; /* Space between subheading and button */
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
-        }
-
-        /* Highlight effect when hovering over the text, subheading, or triggered by the button */
-        .main-title:hover,
-        .main-title.highlight,
-        .subheading:hover,
-        .subheading.highlight {
-            opacity: 0.8; /* Increase opacity for visibility */
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), /* Glow effect */
-                         0 0 40px rgba(255, 105, 180, 0.5);
-            color: #fff; /* Ensure the text color is bright */
-        }
-
-        /* Start button below the subheading */
-        .start-button {
-            background: rgba(255, 105, 180, 0.5); /* Semi-transparent pink to match the theme */
-            border: 2px solid #fff; /* White border for contrast */
-            border-radius: 20px; /* Rounded shape */
-            padding: 10px 20px; /* Default padding for desktop */
-            font-size: 16px; /* Default font size for desktop */
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease; /* Smooth hover transition */
-            text-decoration: none; /* Remove underline for the link */
-            display: inline-block; /* Ensure the link behaves like a button */
-        }
-
-        /* Hover effect for the button */
-        .start-button:hover {
-            background: rgba(255, 105, 180, 0.8); /* Brighter pink on hover */
-            transform: scale(1.1); /* Slight scale-up on hover */
-            opacity: 0.8; /* Match the opacity of the text on hover */
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.8), /* Add glow effect similar to text */
-                        0 0 40px rgba(255, 105, 180, 0.5);
-        }
-
-        .tagline {
-            font-size: 18px;
-            opacity: 0.7;
-            margin-bottom: 20px;
-            max-width: 600px;
-        }
-
-        .buttons {
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
-            gap: 20px;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #000;
+            padding: 15px;
+            z-index: 10;
         }
-
-        .buttons a {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
+        .navbar a {
+            color: white;
             text-decoration: none;
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: background 0.3s;
+            margin-left: 20px;
+            font-size: 18px;
         }
-
-        .buttons a:hover {
-            background: #555;
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
         }
-
-        /* Responsive adjustments for mobile view */
-        @media (max-width: 768px) {
-            .main-title {
-                font-size: 60px; /* Reduce font size for tablets and smaller screens */
-                letter-spacing: 5px; /* Reduce letter spacing for better fit */
-                margin-bottom: 10px; /* Slightly reduce margin */
-            }
-
-            .subheading {
-                font-size: 18px; /* Reduce font size for tablets */
-                letter-spacing: 1px; /* Reduce letter spacing */
-                margin-bottom: 15px; /* Slightly reduce margin */
-            }
-
-            .start-button {
-                padding: 8px 16px; /* Slightly smaller padding for mobile */
-                font-size: 14px; /* Smaller font size for mobile */
-            }
+        .logo img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%; /* Makes the logo circular */
+            margin-right: 10px;
         }
-
-        @media (max-width: 480px) {
-            .main-title {
-                font-size: 40px; /* Further reduce font size for small mobile screens */
-                letter-spacing: 3px; /* Further reduce letter spacing */
-                margin-bottom: 8px; /* Further reduce margin */
-            }
-
-            .subheading {
-                font-size: 14px; /* Further reduce font size for small mobile screens */
-                letter-spacing: 0.5px; /* Further reduce letter spacing */
-                margin-bottom: 10px; /* Further reduce margin */
-            }
-
-            .start-button {
-                padding: 6px 12px; /* Even smaller padding for very small screens */
-                font-size: 12px; /* Even smaller font size */
-            }
+        .watermark {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.2; /* Increased opacity to brighten the watermark */
+        }
+        .watermark span {
+            font-size: 30px;
+            font-weight: bold;
+            color: white;
+            margin: 30px;
+        }
+        .center-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .center-logo img {
+            height: 250px;
+            width: 250px;
+            border-radius: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <h1 class="main-title">BACKLOG BUSTER</h1>
-        <!-- Subheading added below the main title -->
-        <h2 class="subheading">AIMING FOR ZERO BACKLOGS</h2>
-        <!-- Start button links to index.html -->
-        <a href="index.html" class="start-button">Start</a>
-    </div>
-
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/logo2.jpg" alt="BacklogBuster Logo">
+        </div>
+        <a href="home.html">R20</a>
+        <a href="home1.html">R23</a>
+        <a href="team.html">Team</a>
+        <a href="about.html">About</a>
+    </nav>
+    
+    <div class="watermark" id="watermark-container"></div>
+    
     <script>
-        // Get the elements
-        const startButton = document.querySelector('.start-button');
-        const mainTitle = document.querySelector('.main-title');
-        const subheading = document.querySelector('.subheading');
-
-        // Add event listeners for hover on the start button
-        startButton.addEventListener('mouseover', () => {
-            mainTitle.classList.add('highlight');
-            subheading.classList.add('highlight');
-        });
-
-        startButton.addEventListener('mouseout', () => {
-            mainTitle.classList.remove('highlight');
-            subheading.classList.remove('highlight');
+        document.addEventListener("DOMContentLoaded", function () {
+            const watermarkContainer = document.getElementById("watermark-container");
+            for (let i = 0; i < 50; i++) {
+                let span = document.createElement("span");
+                span.innerText = "BacklogBuster";
+                watermarkContainer.appendChild(span);
+            }
         });
     </script>
+    
+    <div class="center-logo">
+        <img src="images/logo1.jpg" alt="BacklogBuster Logo">
+    </div>
 </body>
 </html>
