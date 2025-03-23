@@ -15,28 +15,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Allows content to expand */
+            flex-direction: column;
+            min-height: 100vh;
         }
         .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
             gap: 20px;
-            flex-wrap: wrap;
             padding: 20px;
         }
         .team-member {
             text-align: center;
         }
         .team-member img {
-            width: 150px;
-            height: 100px;
+            width: 170px;
+            height: 250px;
             border-radius: 20px;
             border: 3px solid black;
         }
         .team-member p {
             margin: 5px 0;
-            font-size: 40px;
+            font-size: 22px;
             font-weight: bold;
         }
         .team-member .role {
@@ -47,40 +46,57 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column; /* Stack members vertically on small screens */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             .team-member img {
-                width: 120px;
-                height: 150px;
+                width: 110px;
+                height: 140px;
             }
             .team-member p {
-                font-size: 25px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
+    <h3>click on our pics to visit our linkedin profiles</h3>
     <div class="container">
         <div class="team-member">
             <a href="https://www.linkedin.com/in/esha-korukonda-872779312/" target="_blank">
-            <img src="images/esha.jpg" alt="Team Member 1">
-        </a>
+                <img src="images/esha.jpg" alt="Team Member 1">
+            </a>
             <p>K. Esha</p>
             <p class="role">3rd Yr AIML</p>
-            <p class="role">Backend Developer</p>
+            <p class="role">Backend</p>
         </div>
         <div class="team-member">
-            <img src="images/deepu.jpg" alt="Team Member 2">
+            <a href="https://www.linkedin.com/in/deepika-pyla-bba613295/" target="_blank">
+                <img src="images/deepu.jpg" alt="Team Member 2">
+            </a>
             <p>P. Deepika</p>
             <p class="role">3rd Yr AIML</p>
-            <p class="role">Frontend Developer</p>
+            <p class="role">Frontend</p>
         </div>
         <div class="team-member">
-            <img src="images/shammu1.jpg" alt="Team Member 3">
+            <a href="https://www.linkedin.com/in/sharmila-kanuru-952a78353/" target="_blank">
+                <img src="images/shammu1.jpg" alt="Team Member 3">
+            </a>
             <p>K. Sharmila</p>
             <p class="role">3rd Yr AIML</p>
-            <p class="role">UI/UX Designer</p>
+            <p class="role">Designer</p>
+        </div>
+        <div class="team-member">
+            <a href="https://www.linkedin.com/in/rishi-vardhan-suthi-14ba83295/" target="_blank">
+                <img src="images/rishi.jpg" alt="Team Member 4">
+            </a>
+            
+            <p>S. Rishi</p>
+            <p class="role">3rd Yr AIML</p>
+            <p class="role">Tester</p>
         </div>
     </div>
+    
 </body>
 </html>

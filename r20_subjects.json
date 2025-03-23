@@ -42,7 +42,7 @@
         },
         "2-2": {
           "departments": {
-            "AIML": ["Discrete Mathematics", "Machine Learning Basics", "Computer Networks"],
+            "AIML": ["Formal languages and automata theory", "Machine Learning Basics", "Computer Networks"],
             "CSE": ["Discrete Mathematics", "Design and Analysis of Algorithms", "Database Systems"],
             "ECE": ["Linear IC Applications", "Analog Communications", "Microprocessors"],
             "EEE": ["Control Systems", "Power Electronics", "Electrical Measurements"],
